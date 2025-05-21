@@ -57,6 +57,33 @@ df$married[df$F1 == 1] <- 1
 df$married[df$F1 == 2 |df$F1 == 3] <- 0
 table(df$married)
 
+#教育年数
+table(df$F5, useNA='always')
+df$edu <- NA
+df$edu[df$F5 == 1] <- 7.5
+df$edu[df$F5 == 2] <- 14
+df$edu[df$F5 == 3] <- 16
+df$edu[df$F5 == 4] <- 18
+df$edu[df$F5 == 5] <- NA
+table(df$edu, useNA='always')
+
+#世帯年収
+table(df$F6, useNA='always')
+df$income <- NA
+df$income[df$F6 == 1] <- 0
+df$income[df$F6 == 2] <- 100
+df$income[df$F6 == 3] <- (100+200)/2
+df$income[df$F6 == 4] <- (200+300)/2
+df$income[df$F6 == 5] <- (300+400)/2
+df$income[df$F6 == 6] <- (400+500)/2
+df$income[df$F6 == 7] <- (500+700)/2
+df$income[df$F6 == 8] <- (700+900)/2
+df$income[df$F6 == 9] <- (900+1200)/2
+df$income[df$F6 == 10] <- (1200+1500)/2
+df$income[df$F6 == 11] <- (1500+2000)/2
+df$income[df$F6 == 12] <- 2000
+df$income[df$F6 == 13] <- NA
+table(df$income, useNA='always')
 
 ####地域SC関連項目###################
 #地域への信頼（逆転）
