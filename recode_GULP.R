@@ -1,4 +1,7 @@
 library(tidyverse)
+library(devtools)
+#remotes::install_github("hayatokatagiri/qrecode") #qrecodeの読み込み
+library(qrecode)
 
 #GULPデータの読み込み
 df_urban <- read.csv("1468.csv")   #大都市調査
@@ -98,6 +101,13 @@ table(df$local_trust, useNA='always')
 
 
 ####アウトカム#######################
+#主観的幸福感
+#GULPの先行研究（埴淵編 2022:89）で、地方の方が大都市より幸福感が
+#低いという結果あり。
+table(df$Q12, useNA='always')
+df$happiness <- q_rev(df$Q12)
+table(df$happiness, useNA='always')
+
 #主観的健康感
 table(df$A4, useNA='always')
 df$SRH <- NA
