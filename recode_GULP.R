@@ -57,3 +57,26 @@ df$married[df$F1 == 1] <- 1
 df$married[df$F1 == 2 |df$F1 == 3] <- 0
 table(df$married)
 
+
+####地域SC関連項目###################
+#地域への信頼（逆転）
+table(df$Q4_1, useNA='always')
+df$local_trust <- NA
+df$local_trust[df$Q4_1 == 5] <- 1
+df$local_trust[df$Q4_1 == 4] <- 2
+df$local_trust[df$Q4_1 == 3] <- 3
+df$local_trust[df$Q4_1 == 2] <- 4
+df$local_trust[df$Q4_1 == 1] <- 5
+table(df$local_trust, useNA='always')
+
+
+####アウトカム#######################
+#主観的健康感
+table(df$A4, useNA='always')
+df$SRH <- NA
+df$SRH[df$A4 == 5] <- 1
+df$SRH[df$A4 == 4] <- 2
+df$SRH[df$A4 == 3] <- 3
+df$SRH[df$A4 == 2] <- 4
+df$SRH[df$A4 == 1] <- 5
+table(df$SRH, useNA='always')
