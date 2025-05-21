@@ -27,6 +27,29 @@ head(df)
 tail(df) # データが結合されていることを確認するために最後の方も確認
 
 ####属性・SES####
+#年齢
+table(df$SQ2, useNA='always')
+df$age <- NA
+df$age[df$SQ2 == 0] <- 19
+df$age[df$SQ2 == 1] <- (20 + 24) /2
+df$age[df$SQ2 == 2] <- (25 + 29) /2
+df$age[df$SQ2 == 3] <- (30 + 34) /2
+df$age[df$SQ2 == 4] <- (35 + 39) /2
+df$age[df$SQ2 == 5] <- (40 + 44) /2
+df$age[df$SQ2 == 6] <- (45 + 49) /2
+df$age[df$SQ2 == 7] <- (50 + 54) /2
+df$age[df$SQ2 == 8] <- (55 + 59) /2
+df$age[df$SQ2 == 9] <- (60 + 64) /2
+df$age[df$SQ2 == 10] <- (65 + 69) /2
+df$age[df$SQ2 == 11] <- 70
+table(df$age, useNA='always')
+
+#性別
+table(df$SQ3, useNA='always')
+df$fmd <- NA
+df$fmd[df$SQ3 == 2] <- 1
+df$fmd[df$SQ3 == 1] <- 0
+
 #既婚ダミー
 table(df$F1, useNA='always')
 df$married <- NA
