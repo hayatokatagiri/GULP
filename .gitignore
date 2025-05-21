@@ -4,3 +4,5 @@
 .Ruserdata
 # Ignore all CSV files
 *.csv
+# Ignore all TXT files
+*.txt
