@@ -34,6 +34,15 @@ df$age[df$SQ2 == 10] <- (65 + 69) /2
 df$age[df$SQ2 == 11] <- 70
 table(df$age, useNA='always')
 
+#年齢（カテゴリカル）
+df$age_c <- NA
+df$age_c[df$age >= 20 & df$age <= 39] <- "20-39"　#10代は0人のため入れていない
+df$age_c[df$age >= 40 & df$age <= 64] <- "40-64"
+df$age_c[df$age >= 65] <- "65<"
+df$age_c <- as.factor(df$age_c)
+df$age_c <- factor(df$age_c, levels = c("20-39", "40-64", "65<"))
+table(df$age_c, useNA = 'always')
+
 ##性別####
 table(df$SQ3, useNA='always')
 df$fmd <- NA
@@ -98,14 +107,14 @@ table(df$local_trust, useNA='always')
 
 
 #アウトカム#######################
-#主観的幸福感
+##主観的幸福感####
 #GULPの先行研究（埴淵編 2022:89）で、地方の方が大都市より幸福感が
 #低いという結果あり。
 table(df$Q12, useNA='always')
 df$happiness <- q_rev(df$Q12)
 table(df$happiness, useNA='always')
 
-#主観的健康感
+##主観的健康感####
 table(df$A4, useNA='always')
 df$SRH <- NA
 df$SRH[df$A4 == 5] <- 1

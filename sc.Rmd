@@ -12,12 +12,27 @@ knitr::opts_chunk$set(echo = TRUE)
 地域レベルの社会関係資本の研究
 ```{r}
 source("recode_GULP.R")
+library(effects)
+library(ggplot2) 
 ```
 
+主観的幸福感を従属変数、SCを独立変数とした回帰分析を行う。
+```{r}
+df$fmd <- as.factor(df$fmd) # 性別を因子型に変換
+df$local_trust <- as.numeric(df$local_trust) # 地域への信頼を数値型に変換
+r_happiness <- lm(happiness ~ age_c + fmd + married + edu + income + local_trust + city_type, data = df)
+r_happiness_int <- lm(happiness ~ age_c + fmd + married + edu + income + fmd*local_trust + city_type, data = df)
+summary(r_happiness_int)
+```
+
+男性も女性も、地域住民への信頼が高いほど幸福度が高い傾向にある。
+しかし、男性の方が地域住民への信頼が幸福度に与える正の影響が、女性よりも大きい。
 
 ```{r}
-r_srh <- lm(SRH ~ fmd + married + edu + income + local_trust + city_type, data = df)
-r_srh_2 <- lm(SRH ~ fmd + married + edu + income + local_trust*married + city_type, data = df)
-summary(r_srh_2)
+plot(effect("fmd:local_trust", r_happiness_int),
+     xlab = "Trust in Local Residents (local_trust)", # X軸ラベルも英語に
+     ylab = "Predicted Happiness (happiness)",     # Y軸ラベルも英語に
+     main = "Relationship Between Trust in Local Residents and Happiness (by Gender)", # タイトルを英語に
+     lines = list(multiline = TRUE)) # 性別ごとに異なる線を描く
 ```
 
