@@ -1,0 +1,23 @@
+---
+title: "地域SCの研究"
+author: "Hayato Katagiri"
+date: "2025-05-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+地域レベルの社会関係資本の研究
+```{r}
+source("recode_GULP.R")
+```
+
+
+```{r}
+r_srh <- lm(SRH ~ fmd + married + edu + income + local_trust + city_type, data = df)
+r_srh_2 <- lm(SRH ~ fmd + married + edu + income + local_trust*married + city_type, data = df)
+summary(r_srh_2)
+```
+
